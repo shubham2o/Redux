@@ -1,35 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import { userDelete } from "./store/reducers/UserReducer";
+import { NavLink, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Users from "./components/Users";
+import Products from "./components/Products";
 
 const App = () => {
-  // const data = useSelector((state) => state.UserReducer.users);
-  // OR
-  const { users } = useSelector((state) => state.UserReducer);
-  const dispatch = useDispatch();
-
-  const deleteHandler = (user, index) => {
-    console.log(`${user.name} is removed from the list.`);
-    dispatch(userDelete(index));
-  }
+  const isActiveStyle = (event) => event.isActive ? { color: "#a3e635" } : null;
 
   return (
-    <div className="max-w-screen-xl mx-auto px-6 font-medium flex flex-col items-center gap-7">
-      <h1 className="my-4 text-3xl text-green-500 underline underline-offset-8">User List</h1>
+    <div className="max-w-screen-xl h-full mx-auto p-3 bg-zinc-700">
+      <nav className="w-96 mx-auto mb-2 py-2.5 text-xl font-semibold flex justify-around items-center">
+        <NavLink to="/" style={isActiveStyle}>Home</NavLink>
+        <NavLink to="/users" style={isActiveStyle}>Users</NavLink>
+        <NavLink to="/products" style={isActiveStyle}>Products</NavLink>
+      </nav>
 
-      <ul className="w-full flex flex-col gap-9">
-        {users.map((user, index) => {
-          return (
-            <li key={user.id} className="w-full text-lg flex justify-between items-center hover:text-red-600">
-              <h1>{user.name}</h1>
-
-              <span className="h-7 cursor-pointer flex items-center" onClick={() => deleteHandler(user, index)}>
-                <RiDeleteBin6Fill />
-              </span>
-            </li>
-          )
-        })}
-      </ul>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/products" element={<Products />} />
+      </Routes>
     </div>
   )
 }
