@@ -1,4 +1,6 @@
 import { createStore } from "redux";
+const postCountElement = document.querySelector('.postCount');
+const btnElement = document.querySelector('.btn');
 
 // Initial State or Initial Data
 const initialState = {
@@ -46,7 +48,7 @@ function reducer(state = initialState, action) {
 // console.log(reduxState);
 
 // Store
-const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
 console.log(store);
 
 // getState()
@@ -55,6 +57,7 @@ console.log(store.getState());
 // subscribe()
 store.subscribe(() => {
     console.log(store.getState());
+    postCountElement.innerHTML = store.getState().post;
 });
 
 // disptach()
@@ -62,3 +65,11 @@ store.dispatch({ type: INCREASE_BY, payload: 3 });
 store.dispatch({ type: INCREMENT });
 store.dispatch({ type: DECREASE_BY, payload: 3 });
 store.dispatch({ type: DECREMENT });
+
+setTimeout(() => {
+    store.dispatch({ type: INCREASE_BY, payload: 100 });
+}, 2000);
+
+btnElement.addEventListener('click', () => {
+    store.dispatch({ type: INCREASE_BY, payload: 10 })
+});
