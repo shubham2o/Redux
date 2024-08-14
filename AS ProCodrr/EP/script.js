@@ -1,4 +1,7 @@
 import { createStore } from "redux";
+
+console.log(`<----- script.js ----->`);
+
 const postCountElement = document.querySelector('.postCount');
 const btnElement = document.querySelector('.btn');
 
