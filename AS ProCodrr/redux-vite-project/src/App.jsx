@@ -1,7 +1,11 @@
+import Header from "./components/Header";
+import { Outlet } from "react-router-dom";
+
 const App = () => {
   return (
     <div>
-      <h1>Vite + React</h1>
+      <Header />
+      <Outlet />
     </div>
   )
 }
