@@ -1,7 +1,7 @@
 import { combineReducers, createStore } from "redux";
 import { productsReducer } from "./productsReducer";
-import { CART_ADD_ITEM, CART_DECREASE_ITEM_QUANTITY, CART_INCREASE_ITEM_QUANTITY, CART_REMOVE_ITEM, cartReducer } from "./cartReducer";
-import { WISHLIST_ADD_ITEM, WISHLIST_REMOVE_ITEM, wishListReducer } from "./wishListReducer";
+import { addItemToCart, cartReducer, decreaseQuantityOfCartItems, increaseQuantityOfCartItems, removeItemFromCart } from "./cartReducer";
+import { addItemToWishList, removeItemFromWishList, wishListReducer } from "./wishListReducer";
 
 console.log(`<----- reduxScript.js ----->`);
 
@@ -13,12 +13,12 @@ const reducer = combineReducers({
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
 
-store.dispatch({ type: CART_ADD_ITEM, payload: { productId: 1, quantity: 1 } });
-store.dispatch({ type: CART_ADD_ITEM, payload: { productId: 22, quantity: 22 } });
-store.dispatch({ type: CART_ADD_ITEM, payload: { productId: 333, quantity: 333 } });
-store.dispatch({ type: CART_REMOVE_ITEM, payload: { productId: 22 } });
-store.dispatch({ type: CART_INCREASE_ITEM_QUANTITY, payload: { productId: 1, quantity: 2 } });
-store.dispatch({ type: CART_DECREASE_ITEM_QUANTITY, payload: { productId: 1 } });
-store.dispatch({ type: CART_DECREASE_ITEM_QUANTITY, payload: { productId: 1 } });
-store.dispatch({ type: WISHLIST_ADD_ITEM, payload: { productId: 4444 } });
-store.dispatch({ type: WISHLIST_REMOVE_ITEM, payload: { productId: 4444 } });
+store.dispatch(addItemToCart(101));
+store.dispatch(addItemToCart(202, 2));
+store.dispatch(addItemToCart(303, 3));
+store.dispatch(removeItemFromCart(202));
+store.dispatch(increaseQuantityOfCartItems(101, 2));
+store.dispatch(decreaseQuantityOfCartItems(101));
+store.dispatch(decreaseQuantityOfCartItems(101));
+store.dispatch(addItemToWishList(404, 4));
+store.dispatch(removeItemFromWishList(404));
