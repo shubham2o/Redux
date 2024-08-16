@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div className="products-container">
             {products.map(({ id, title, rating, price, image }) =>
-                <Product key={id} title={title} rating={rating.rate} price={price} image={image} />
+                <Product key={id} productId={id} title={title} rating={rating.rate} price={price} image={image} />
             )}
         </div>
     )

@@ -1,4 +1,9 @@
-const Product = ({ title, rating, price, image }) => {
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../store/cartReducer";
+
+const Product = ({ productId, title, rating, price, image }) => {
+    const dispatch = useDispatch();
+
     return (
         <div className="product">
             <div className="product-image">
@@ -18,9 +23,19 @@ const Product = ({ title, rating, price, image }) => {
             </div>
 
             <div className="cta-container mt-2">
-                <button className="border border-black rounded-full">Add to Cart</button>
+                <button
+                    className="border border-black rounded-full bg-stone-200"
+                    onClick={() => dispatch(addItemToCart({ productId, title, rating, price, image }))}
+                >
+                    Add to Cart
+                </button>
 
-                <button className="border border-black rounded-full">Buy Now</button>
+                <button
+                    className="border border-black rounded-full bg-stone-200"
+                // onClick={}
+                >
+                    Buy Now
+                </button>
             </div>
         </div>
     )
