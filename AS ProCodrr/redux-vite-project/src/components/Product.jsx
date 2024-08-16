@@ -34,7 +34,7 @@ const Product = ({ productId, title, rating, price, image }) => {
                     className="border border-black rounded-full bg-stone-200"
                 // onClick={}
                 >
-                    Buy Now
+                    ❤️ Wishlist
                 </button>
             </div>
         </div>

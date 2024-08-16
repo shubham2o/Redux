@@ -25,12 +25,7 @@ const Cart = () => {
                     <div></div>
                     <div></div>
                     <div className="total">
-                        $
-                        {cartItems
-                            .map((items) => items.quantity > 1 ? (items.quantity * items.price) : items.price)
-                            .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-                            .toFixed(2)
-                        }
+                        $ {cartItems.reduce((accumulator, currentItem) => accumulator + (currentItem.quantity * currentItem.price), 0).toFixed(2)}
                     </div>
                 </div>
             </div>

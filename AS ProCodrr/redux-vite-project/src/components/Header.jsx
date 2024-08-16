@@ -9,7 +9,7 @@ const Header = () => {
         <header className='bg-zinc-900'>
             <div className="header-contents">
                 <h1>
-                    <Link to="/" className='text-3xl font-bold text-red-500 tracking-tighter'>ShopKaro.</Link>
+                    <Link to="/" className='text-3xl font-bold text-red-500 tracking-tighter'>$hoptify ™</Link>
                 </h1>
 
                 <Link className="cart-icon h-full mb-[1.05rem] flex flex-col items-center justify-end" to="/cart">
