@@ -13,6 +13,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Mona-Sans";
+  background-color: #71717a;
 }
 
 a {
@@ -29,20 +30,19 @@ button {
   max-width: 1200px;
   margin-top: 24px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 24px;
+  gap: 26px;
   margin-inline: auto;
   display: grid;
-  padding: 16px;
+  padding-bottom: 20px;
 }
 
 .product {
   background-color: #fff;
-  border-radius: 14px;
+  border-radius: 24px;
   transition: all 0.2s ease-in-out;
   display: inline-block;
   overflow: hidden;
   padding: 16px;
-  border: 1px solid black;
 }
 
 .title-container {
@@ -55,11 +55,11 @@ button {
 
 .product h3 {
   margin: 0; /* Remove default margin to avoid extra space */
-  line-height: 1.2; /* Adjust line height as needed */
+  line-height: 1.3; /* Adjust line height as needed */
   max-height: 2.4em; /* (line-height * number of lines) to limit to two lines */
   text-overflow: ellipsis;
   white-space: normal; /* Allow text to wrap */
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .product-image {
@@ -81,11 +81,12 @@ button {
 
 .cta-container {
   display: flex;
-  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cta-container button {
-  width: 50%;
+  width: 46.5%;
   cursor: pointer;
 }
 
@@ -145,18 +146,13 @@ form button {
 }
 
 .cart-header {
-  font-weight: 700;
-  padding: 24px;
-}
-
-.cart-item-container:not(:last-child) {
-  border-bottom: 1px solid #898989;
+  padding: 5px 0px;
 }
 
 .cart-item-container {
-  padding: 12px 24px;
+  padding-bottom: 7px;
   display: grid;
-  gap: 16px;
+  gap: 7px;
   grid-template-columns: 4fr 1fr 1fr 1fr;
 }
 

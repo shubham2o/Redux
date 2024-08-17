@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-zinc-500">
       <Header />
       <Outlet />
     </div>
