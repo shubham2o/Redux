@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../store/cartReducer";
+import { addItemToWishList } from "../store/wishListReducer";
 
 const Product = ({ productId, title, rating, price, image }) => {
     const dispatch = useDispatch();
     const cartItems = useSelector(({ cartItems }) => cartItems);
+    // const wishlistItems = useSelector(({ wishList }) => wishList);
+    // console.log(wishlistItems);
     const existingItem = cartItems.find((item) => item.productId === productId);
 
     return (
@@ -54,7 +57,7 @@ const Product = ({ productId, title, rating, price, image }) => {
 
                 <button
                     className="rounded-full text-white text-sm font-semibold bg-zinc-500 tracking-wide hover:bg-pink-600"
-                // onClick={}
+                    onClick={() => dispatch(addItemToWishList({ productId, title, rating, price, image }))}
                 >
                     🤍 Wishlist
                 </button>
