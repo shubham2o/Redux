@@ -16,15 +16,15 @@ const Header = () => {
                 </h1>
 
                 <div className="mt-8 flex gap-7">
-                    <Link className="cart-icon h-full text-white font-semibold flex flex-col items-center justify-end" to="/wishlist">
+                    {/* <Link className="cart-icon h-full text-white font-semibold flex flex-col items-center justify-end" to="/wishlist">
                         <div className="cart-items-count w-7 h-7 mb-[0.10rem]">
                             <div className="w-full h-full rounded-full pt-0.5 flex justify-center items-center bg-pink-600">
-                                {/* {wishlistItems.reduce((accumulator, currentValue) => accumulator + currentValue, 0)} */}
+                                {wishlistItems.reduce((accumulator, currentValue) => accumulator + currentValue, 0)}
                             </div>
                         </div>
 
                         <GrFavorite className="w-8 text-2xl text-pink-600" />
-                    </Link>
+                    </Link> */}
 
                     <Link className="cart-icon h-full text-white font-semibold flex flex-col items-center justify-end" to="/cart">
                         <div className="cart-items-count w-7 h-7 mb-[0.10rem]">
