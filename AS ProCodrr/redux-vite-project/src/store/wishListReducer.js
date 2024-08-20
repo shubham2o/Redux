@@ -1,6 +1,6 @@
 // Action Types
-const WISHLIST_ADD_ITEM = 'wishList/addItem';
-const WISHLIST_REMOVE_ITEM = 'wishList/removeItem';
+const WISHLIST_ADD_ITEM = 'wishlist/addItem';
+const WISHLIST_REMOVE_ITEM = 'wishlist/removeItem';
 
 // Action Creators
 export const addItemToWishlist = (productData) => {
@@ -18,7 +18,7 @@ export const removeItemFromWishlist = (productId) => {
 }
 
 // Reducer
-export const wishListReducer = (state = [], action) => {
+export const wishlistReducer = (state = [], action) => {
     const existingWishlist = state.find((wishlistItem) => wishlistItem.productId === action.payload.productId);
 
     switch (action.type) {

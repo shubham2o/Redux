@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
     const cartItems = useSelector(({ cartItems }) => cartItems);
-    const wishlistItems = useSelector(({ wishList }) => wishList);
+    const wishlistItems = useSelector(({ wishlist }) => wishlist);
 
     return (
         <header className='bg-zinc-900'>

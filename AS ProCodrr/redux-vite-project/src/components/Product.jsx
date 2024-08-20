@@ -6,7 +6,7 @@ const Product = ({ productId, title, rating, price, image }) => {
     const dispatch = useDispatch();
     const cartItems = useSelector(({ cartItems }) => cartItems);
     const existingCartItem = cartItems.find((cartItem) => cartItem.productId === productId);
-    const wishlistItems = useSelector(({ wishList }) => wishList);
+    const wishlistItems = useSelector(({ wishlist }) => wishlist);
     const existingWishlist = wishlistItems.find((wishlist) => wishlist.productId === productId);
 
     return (

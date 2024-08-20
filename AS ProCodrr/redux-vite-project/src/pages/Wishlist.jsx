@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Product from "../components/Product";
 
 const Wishlist = () => {
-    const wishlistItems = useSelector(({ wishList }) => wishList);
+    const wishlistItems = useSelector(({ wishlist }) => wishlist);
 
     return (
         <div className="max-w-screen-xl h-full mx-auto p-8 font-semibold tracking-wide">
