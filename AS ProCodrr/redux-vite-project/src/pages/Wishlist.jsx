@@ -10,7 +10,7 @@ const Wishlist = () => {
 
             <div className="products-container">
                 {wishlistItems.map(({ productId, title, rating, price, image }) =>
-                    <Product key={productId} productId={productId} title={title} rating={rating.rate} price={price} image={image} />
+                    <Product key={productId} productId={productId} title={title} rating={rating} price={price} image={image} />
                 )}
             </div>
         </div>

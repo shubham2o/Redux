@@ -1,19 +1,30 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../store/cartReducer";
+import { addItemToWishlist } from "../store/wishListReducer";
+import { GoHeartFill } from "react-icons/go";
 
 const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
     const dispatch = useDispatch();
+    const wishlistItems = useSelector(({ wishList }) => wishList);
+    const existingWishlist = wishlistItems.find((wishlist) => wishlist.productId === productId);
     const total = (price * quantity).toFixed(2);
 
     return (
         <div className="cart-item-container">
-            <div className="cart-item bg-white">
+            <div className="cart-item px-2.5 bg-white">
                 <img src={image} alt={title} />
 
-                <div>
-                    <h3>{title}</h3>
+                <div className="w-full">
+                    <h3 className="text-[17px]">{title}</h3>
                     <p>{rating} ★ ★ ★ ★</p>
                 </div>
+
+                <button
+                    className={`text-2xl ${existingWishlist ? "text-pink-600" : "text-[#b8b8c1]"}`}
+                    onClick={() => dispatch(addItemToWishlist({ productId, title, rating, price, image }))}
+                >
+                    <GoHeartFill />
+                </button>
             </div>
 
             <div className="item-price bg-white">${price}</div>
