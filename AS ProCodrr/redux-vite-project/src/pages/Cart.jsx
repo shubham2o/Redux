@@ -6,7 +6,7 @@ const Cart = () => {
 
     return (
         <div className="cart-container h-full font-semibold tracking-wide">
-            <h2 className="text-2xl underline underline-offset-8 text-white">Items in Your Cart</h2>
+            <h2 className="text-2xl underline underline-offset-8 text-white">Items in your Cart</h2>
 
             <div className="cart-items-container">
                 <div className="cart-header cart-item-container mb-1 text-xl text-white">
