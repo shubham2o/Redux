@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, decreaseCartItemQuantity } from "../store/slices/cartSlice";
-import { addItemToWishlist } from "../store/slices/wishlistSlice";
+import { wishlistToggle } from "../store/slices/wishlistSlice";
 
 const Product = ({ productId, title, rating, price, image }) => {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Product = ({ productId, title, rating, price, image }) => {
             <div className="cta-container mt-3 mb-1 text-white text-sm font-semibold tracking-wide">
                 <button
                     className={`rounded-full ${existingWishlist ? "bg-pink-600" : "bg-zinc-500"}`}
-                    onClick={() => dispatch(addItemToWishlist({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(wishlistToggle({ productId, title, rating, price, image }))}
                 >
                     🤍 Wishlist
                 </button>

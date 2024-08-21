@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, decreaseCartItemQuantity, removeFromCart } from "../store/slices/cartSlice";
-import { addItemToWishlist } from "../store/slices/wishlistSlice";
+import { wishlistToggle } from "../store/slices/wishlistSlice";
 import { GoHeartFill } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 
@@ -22,7 +22,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
 
                 <button
                     className={`text-[21px] ${existingWishlist ? "text-pink-600" : "text-[#b8b8c1]"}`}
-                    onClick={() => dispatch(addItemToWishlist({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(wishlistToggle({ productId, title, rating, price, image }))}
                 >
                     <GoHeartFill />
                 </button>
@@ -51,9 +51,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
             <div className="item-total w-full text-center bg-white tracking-wider">${total}</div>
 
             <div className="w-full text-red-500 text-[22px]">
-                <button className="w-full rounded-full bg-white" onClick={() => dispatch(removeFromCart(productId))}>
-                    <MdDelete />
-                </button>
+                <button className="w-full rounded-full bg-white" onClick={() => dispatch(removeFromCart(productId))}><MdDelete /></button>
             </div>
         </div>
     )

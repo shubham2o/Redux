@@ -56,13 +56,9 @@ export const cartReducer = (originalState = [], action) => {
 
             case CART_REMOVE_ITEM: {
                 state.splice(existingCartItemIndex, 1);
-                break;
             }
-
-            default:
-                break;
         }
 
         return state;
-    })
+    });
 }

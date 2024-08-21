@@ -1,41 +1,32 @@
+import { produce } from "immer";
+
 // Action Types
-const WISHLIST_ADD_ITEM = 'wishlist/addItem';
-const WISHLIST_REMOVE_ITEM = 'wishlist/removeItem';
+const WISHLIST_TOGGLE_ITEM = 'wishlist/toggleItem';
 
 // Action Creators
-export const addItemToWishlist = (productData) => {
+export const wishlistToggle = (productData) => {
     return {
-        type: WISHLIST_ADD_ITEM,
+        type: WISHLIST_TOGGLE_ITEM,
         payload: productData,
     }
 }
 
-export const removeItemFromWishlist = (productId) => {
-    return {
-        type: WISHLIST_REMOVE_ITEM,
-        payload: { productId }
-    }
-}
-
 // Reducer
-export const wishlistReducer = (state = [], action) => {
-    const existingWishlist = state.find((wishlistItem) => wishlistItem.productId === action.payload.productId);
+export const wishlistReducer = (originalState = [], action) => {
+    return produce(originalState, (state) => {
+        const existingWishlistIndex = state.findIndex((wishlistItem) => wishlistItem.productId === action.payload.productId);
 
-    switch (action.type) {
-        case WISHLIST_ADD_ITEM: {
-            if (existingWishlist) {
-                return state
-                    .map((wishlistItem) => wishlistItem.productId === existingWishlist.productId ? { ...wishlistItem, quantity: wishlistItem.quantity + 1 } : wishlistItem)
-                    .filter((wishlistItem) => wishlistItem.quantity < 2);
+        switch (action.type) {
+            case WISHLIST_TOGGLE_ITEM: {
+                if (existingWishlistIndex !== -1) {
+                    state.splice(existingWishlistIndex, 1);
+                    break;
+                }
+
+                state.push({ ...action.payload, quantity: 1 });
             }
-            return [...state, { ...action.payload, quantity: 1 }];
         }
 
-        case WISHLIST_REMOVE_ITEM: {
-            return state.filter((wishlistItem) => wishlistItem.productId != action.payload.productId)
-        }
-
-        default:
-            return state;
-    }
+        return state;
+    });
 }
