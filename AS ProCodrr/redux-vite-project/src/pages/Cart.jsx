@@ -13,7 +13,7 @@ const Cart = () => {
                     <div className="cart-item justify-center">Item</div>
                     <div className="item-price">Price</div>
                     <div className="quantity">Quantity</div>
-                    <div className="total pr-16">Total</div>
+                    <div className="total pr-[3.8rem]">Total</div>
                 </div>
 
                 {cartItems.map(({ productId, title, rating, price, image, quantity }) =>
@@ -24,7 +24,7 @@ const Cart = () => {
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div className="total pr-12 py-1.5 bg-green-700 text-white text-lg cursor-pointer">
+                    <div className="total w-full pr-[3.2rem] py-1.5 bg-green-700 text-white text-lg tracking-wider cursor-pointer">
                         $ {cartItems.reduce((accumulator, currentItem) => accumulator + (currentItem.quantity * currentItem.price), 0).toFixed(2)}
                     </div>
                 </div>

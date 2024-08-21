@@ -5,7 +5,7 @@ import { store } from './store/index.js';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from "./pages/Home.jsx";
 import Cart from './pages/Cart.jsx';
-import Wishlist from './pages/wishList.jsx';
+import Wishlist from './pages/wishlist.jsx';
 import './index.css';
 
 const router = createBrowserRouter([

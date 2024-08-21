@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, removeItemFromCart } from "../store/cartReducer";
-import { addItemToWishlist } from "../store/wishlistReducer";
+import { addToCart, decreaseCartItemQuantity, removeFromCart } from "../store/slices/cartSlice";
+import { addItemToWishlist } from "../store/slices/wishlistSlice";
 import { GoHeartFill } from "react-icons/go";
+import { MdDelete } from "react-icons/md";
 
 const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
             <div className="item-quantity text-center text-2xl text-white bg-white">
                 <button
                     className="w-[3px] h-[3px] rounded-full p-3 bg-red-500 flex justify-center items-center"
-                    onClick={() => dispatch(removeItemFromCart(productId))}
+                    onClick={() => dispatch(decreaseCartItemQuantity(productId))}
                 >
                     -
                 </button>
@@ -41,13 +42,19 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
 
                 <button
                     className="w-[3px] h-[3px] rounded-full px-3 pt-3.5 pb-2.5 bg-green-500 flex justify-center items-center"
-                    onClick={() => dispatch(addItemToCart({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(addToCart({ productId, title, rating, price, image }))}
                 >
                     +
                 </button>
             </div>
 
-            <div className="item-total bg-white pr-14">${total}</div>
+            <div className="item-total w-full text-center bg-white tracking-wider">${total}</div>
+
+            <div className="w-full text-red-500 text-[22px]">
+                <button className="w-full rounded-full bg-white" onClick={() => dispatch(removeFromCart(productId))}>
+                    <MdDelete />
+                </button>
+            </div>
         </div>
     )
 }

@@ -153,7 +153,7 @@ form button {
   padding-bottom: 7px;
   display: grid;
   gap: 7px;
-  grid-template-columns: 4fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr 1fr 1fr 0.2fr;
 }
 
 .cart-item-container > div:not(.cart-item) {

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, removeItemFromCart } from "../store/cartReducer";
-import { addItemToWishlist } from "../store/wishListReducer";
+import { addToCart, decreaseCartItemQuantity } from "../store/slices/cartSlice";
+import { addItemToWishlist } from "../store/slices/wishlistSlice";
 
 const Product = ({ productId, title, rating, price, image }) => {
     const dispatch = useDispatch();
@@ -37,14 +37,14 @@ const Product = ({ productId, title, rating, price, image }) => {
                 {existingCartItem
                     ?
                     <div className="w-[46.5%] rounded-full bg-blue-600 text-center text-xl font-bold leading-none flex items-center">
-                        <button className="pl-3" onClick={() => dispatch(removeItemFromCart(productId))}>-</button>
+                        <button className="pl-3" onClick={() => dispatch(decreaseCartItemQuantity(productId))}>-</button>
 
                         <p className="w-16 h-9 text-base flex justify-center items-center">{existingCartItem.quantity}</p>
 
-                        <button className="pr-3" onClick={() => dispatch(addItemToCart({ productId, title, rating, price, image }))}>+</button>
+                        <button className="pr-3" onClick={() => dispatch(addToCart({ productId, title, rating, price, image }))}>+</button>
                     </div>
                     :
-                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addItemToCart({ productId, title, rating, price, image }))}>
+                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addToCart({ productId, title, rating, price, image }))}>
                         Add to Cart
                     </button>
                 }
