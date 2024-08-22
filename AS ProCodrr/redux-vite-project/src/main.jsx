@@ -1,12 +1,12 @@
-import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-import { Provider } from 'react-redux';
-import { store } from './store/index.js';
+import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
 import Home from "./pages/Home.jsx";
 import Cart from './pages/Cart.jsx';
 import Wishlist from './pages/wishlist.jsx';
-import './index.css';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './store/index.js';
 
 const router = createBrowserRouter([
   {

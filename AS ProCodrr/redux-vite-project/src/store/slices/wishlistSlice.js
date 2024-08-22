@@ -1,32 +1,24 @@
-import { produce } from "immer";
+import { createSlice } from "@reduxjs/toolkit";
 
-// Action Types
-const WISHLIST_TOGGLE_ITEM = 'wishlist/toggleItem';
-
-// Action Creators
-export const wishlistToggle = (productData) => {
-    return {
-        type: WISHLIST_TOGGLE_ITEM,
-        payload: productData,
-    }
+const findWishlistIndex = (state, action) => {
+    return state.findIndex((wishlistItem) => wishlistItem.productId === action.payload.productId);
 }
 
-// Reducer
-export const wishlistReducer = (originalState = [], action) => {
-    return produce(originalState, (state) => {
-        const existingWishlistIndex = state.findIndex((wishlistItem) => wishlistItem.productId === action.payload.productId);
+const wishlistSlice = createSlice({
+    name: 'wishlist',
+    initialState: [],
+    reducers: {
+        toggleWishlist: (state, action) => {
+            const existingWishlistIndex = findWishlistIndex(state, action);
 
-        switch (action.type) {
-            case WISHLIST_TOGGLE_ITEM: {
-                if (existingWishlistIndex !== -1) {
-                    state.splice(existingWishlistIndex, 1);
-                    break;
-                }
-
+            if (existingWishlistIndex !== -1) {
+                state.splice(existingWishlistIndex, 1);
+            } else {
                 state.push({ ...action.payload, quantity: 1 });
             }
-        }
+        },
+    },
+});
 
-        return state;
-    });
-}
+export const { toggleWishlist } = wishlistSlice.actions;
+export default wishlistSlice.reducer;

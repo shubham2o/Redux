@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseCartItemQuantity } from "../store/slices/cartSlice";
-import { wishlistToggle } from "../store/slices/wishlistSlice";
+import { toggleWishlist } from "../store/slices/wishlistSlice";
+import { decreaseItemQuantity, increaseItemQuantity, addItem } from "../store/slices/cartSlice";
 
 const Product = ({ productId, title, rating, price, image }) => {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Product = ({ productId, title, rating, price, image }) => {
             <div className="cta-container mt-3 mb-1 text-white text-sm font-semibold tracking-wide">
                 <button
                     className={`rounded-full ${existingWishlist ? "bg-pink-600" : "bg-zinc-500"}`}
-                    onClick={() => dispatch(wishlistToggle({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(toggleWishlist({ productId, title, rating, price, image }))}
                 >
                     🤍 Wishlist
                 </button>
@@ -37,14 +37,14 @@ const Product = ({ productId, title, rating, price, image }) => {
                 {existingCartItem
                     ?
                     <div className="w-[46.5%] rounded-full bg-blue-600 text-center text-xl font-bold leading-none flex items-center">
-                        <button className="pl-3" onClick={() => dispatch(decreaseCartItemQuantity(productId))}>-</button>
+                        <button className="pl-3" onClick={() => dispatch(decreaseItemQuantity({ productId }))}>-</button>
 
                         <p className="w-16 h-9 text-base flex justify-center items-center">{existingCartItem.quantity}</p>
 
-                        <button className="pr-3" onClick={() => dispatch(addToCart({ productId, title, rating, price, image }))}>+</button>
+                        <button className="pr-3" onClick={() => dispatch(increaseItemQuantity({ productId, title, rating, price, image }))}>+</button>
                     </div>
                     :
-                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addToCart({ productId, title, rating, price, image }))}>
+                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addItem({ productId, title, rating, price, image }))}>
                         Add to Cart
                     </button>
                 }

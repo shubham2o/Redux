@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseCartItemQuantity, removeFromCart } from "../store/slices/cartSlice";
-import { wishlistToggle } from "../store/slices/wishlistSlice";
+import { toggleWishlist } from "../store/slices/wishlistSlice";
 import { GoHeartFill } from "react-icons/go";
+import { decreaseItemQuantity, increaseItemQuantity, removeItem } from "../store/slices/cartSlice";
 import { MdDelete } from "react-icons/md";
 
 const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
@@ -22,7 +22,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
 
                 <button
                     className={`text-[21px] ${existingWishlist ? "text-pink-600" : "text-[#b8b8c1]"}`}
-                    onClick={() => dispatch(wishlistToggle({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(toggleWishlist({ productId, title, rating, price, image }))}
                 >
                     <GoHeartFill />
                 </button>
@@ -33,7 +33,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
             <div className="item-quantity text-center text-2xl text-white bg-white">
                 <button
                     className="w-[3px] h-[3px] rounded-full p-3 bg-red-500 flex justify-center items-center"
-                    onClick={() => dispatch(decreaseCartItemQuantity(productId))}
+                    onClick={() => dispatch(decreaseItemQuantity({ productId }))}
                 >
                     -
                 </button>
@@ -42,7 +42,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
 
                 <button
                     className="w-[3px] h-[3px] rounded-full px-3 pt-3.5 pb-2.5 bg-green-500 flex justify-center items-center"
-                    onClick={() => dispatch(addToCart({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(increaseItemQuantity({ productId, title, rating, price, image }))}
                 >
                     +
                 </button>
@@ -51,7 +51,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
             <div className="item-total w-full text-center bg-white tracking-wider">${total}</div>
 
             <div className="w-full text-red-500 text-[22px]">
-                <button className="w-full rounded-full bg-white" onClick={() => dispatch(removeFromCart(productId))}><MdDelete /></button>
+                <button className="w-full rounded-full bg-white" onClick={() => dispatch(removeItem({ productId }))}><MdDelete /></button>
             </div>
         </div>
     )

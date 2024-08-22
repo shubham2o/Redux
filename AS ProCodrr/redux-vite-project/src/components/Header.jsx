@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { PiShoppingCart } from "react-icons/pi";
-import { GrFavorite } from "react-icons/gr";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { GrFavorite } from "react-icons/gr";
+import { PiShoppingCart } from "react-icons/pi";
 
 const Header = () => {
     const cartItems = useSelector(({ cartItems }) => cartItems);

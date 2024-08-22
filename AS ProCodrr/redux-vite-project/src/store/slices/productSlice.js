@@ -1,5 +1,7 @@
 import productsList from "../productsList";
 
-export const productsReducer = (state = productsList) => {
+const productsReducer = (state = productsList) => {
     return state;
 }
+
+export default productsReducer;
