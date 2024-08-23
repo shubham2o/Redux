@@ -3,8 +3,8 @@ import Product from "../components/Product";
 
 const Wishlist = () => {
     const wishlistItems = useSelector(({ products, wishlist }) => {
-        return wishlist.map(({ productId }) => {
-            const wishlistProduct = products.list.find((product) => product.id === productId);
+        return wishlist.map(({ id }) => {
+            const wishlistProduct = products.list.find((product) => product.id === id);
             return wishlistProduct;
         });
     });
@@ -15,7 +15,7 @@ const Wishlist = () => {
 
             <div className="products-container">
                 {wishlistItems.map(({ id, title, rating, price, image }) =>
-                    <Product key={id} productId={id} title={title} rating={rating.rate} price={price} image={image} />
+                    <Product key={id} id={id} title={title} rating={rating.rate} price={price} image={image} />
                 )}
             </div>
         </div>

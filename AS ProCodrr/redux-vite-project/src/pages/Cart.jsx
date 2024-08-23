@@ -3,8 +3,8 @@ import CartItem from "../components/CartItem";
 
 const Cart = () => {
     const cartItems = useSelector(({ products, cartItems }) => {
-        return cartItems.map(({ productId, quantity }) => {
-            const cartProduct = products.list.find((product) => product.id === productId);
+        return cartItems.map(({ id, quantity }) => {
+            const cartProduct = products.list.find((product) => product.id === id);
             return { ...cartProduct, quantity };
         })
     });
@@ -22,7 +22,7 @@ const Cart = () => {
                 </div>
 
                 {cartItems.map(({ id, title, rating, price, image, quantity }) =>
-                    <CartItem key={id} productId={id} title={title} rating={rating.rate} price={price} image={image} quantity={quantity} />
+                    <CartItem key={id} id={id} title={title} rating={rating.rate} price={price} image={image} quantity={quantity} />
                 )}
 
                 <div className="cart-header cart-item-container">

@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleWishlist } from "../store/slices/wishlistSlice";
 import { decreaseItemQuantity, increaseItemQuantity, addItem } from "../store/slices/cartSlice";
 
-const Product = ({ productId, title, rating, price, image }) => {
+const Product = ({ id, title, rating, price, image }) => {
     const dispatch = useDispatch();
     const cartItems = useSelector(({ cartItems }) => cartItems);
-    const existingCartItem = cartItems.find((cartItem) => cartItem.productId === productId);
+    const existingCartItem = cartItems.find((cartItem) => cartItem.id === id);
     const wishlistItems = useSelector(({ wishlist }) => wishlist);
-    const existingWishlist = wishlistItems.find((wishlist) => wishlist.productId === productId);
+    const existingWishlist = wishlistItems.find((wishlist) => wishlist.id === id);
 
     return (
         <div className="product">
@@ -27,24 +27,21 @@ const Product = ({ productId, title, rating, price, image }) => {
             </div>
 
             <div className="cta-container mt-3 mb-1 text-white text-sm font-semibold tracking-wide">
-                <button
-                    className={`rounded-full ${existingWishlist ? "bg-pink-600" : "bg-zinc-500"}`}
-                    onClick={() => dispatch(toggleWishlist({ productId }))}
-                >
+                <button className={`rounded-full ${existingWishlist ? "bg-pink-600" : "bg-zinc-500"}`} onClick={() => dispatch(toggleWishlist({ id }))}>
                     🤍 Wishlist
                 </button>
 
                 {existingCartItem
                     ?
                     <div className="w-[46.5%] rounded-full bg-blue-600 text-center text-xl font-bold leading-none flex items-center">
-                        <button className="pl-3" onClick={() => dispatch(decreaseItemQuantity({ productId }))}>-</button>
+                        <button className="pl-3" onClick={() => dispatch(decreaseItemQuantity({ id }))}>-</button>
 
                         <p className="w-16 h-9 text-base flex justify-center items-center">{existingCartItem.quantity}</p>
 
-                        <button className="pr-3" onClick={() => dispatch(increaseItemQuantity({ productId }))}>+</button>
+                        <button className="pr-3" onClick={() => dispatch(increaseItemQuantity({ id }))}>+</button>
                     </div>
                     :
-                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addItem({ productId }))}>Add to Cart</button>
+                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addItem({ id }))}>Add to Cart</button>
                 }
             </div>
         </div>

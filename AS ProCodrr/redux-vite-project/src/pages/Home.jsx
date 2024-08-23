@@ -22,7 +22,7 @@ const Home = () => {
                     :
                     <div className="products-container px-8">
                         {products.map(({ id, title, rating, price, image }) =>
-                            <Product key={id} productId={id} title={title} rating={rating.rate} price={price} image={image} />
+                            <Product key={id} id={id} title={title} rating={rating.rate} price={price} image={image} />
                         )}
                     </div>
                 )
