@@ -10,30 +10,17 @@ const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const existingCartItemIndex = findItemIndex(state, action);
-
-            if (existingCartItemIndex !== -1) {
-                state[existingCartItemIndex].quantity += 1;
-            } else {
-                state.push({ ...action.payload, quantity: 1 });
-            }
+            existingCartItemIndex !== -1 ? state[existingCartItemIndex].quantity += 1 : state.push({ ...action.payload, quantity: 1 })
         },
 
         removeItem: (state, action) => {
             const existingCartItemIndex = findItemIndex(state, action);
-
-            if (existingCartItemIndex !== -1) {
-                state.splice(existingCartItemIndex, 1);
-            }
+            existingCartItemIndex !== -1 && state.splice(existingCartItemIndex, 1)
         },
 
         increaseItemQuantity: (state, action) => {
             const existingCartItemIndex = findItemIndex(state, action);
-
-            if (existingCartItemIndex !== -1) {
-                state[existingCartItemIndex].quantity += 1;
-            } else {
-                state.push({ ...action.payload, quantity: 1 });
-            }
+            existingCartItemIndex !== -1 ? state[existingCartItemIndex].quantity += 1 : state.push({ ...action.payload, quantity: 1 })
         },
 
         decreaseItemQuantity: (state, action) => {
