@@ -1,7 +1,30 @@
-import productsList from "../productsList";
+import { createSlice } from "@reduxjs/toolkit";
 
-const productsReducer = (state = productsList) => {
-    return state;
-}
+const productSlice = createSlice({
+    name: 'product',
+    initialState: {
+        loading: false,
+        error: false,
+        list: [],
+    },
+    reducers: {
+        loadingState: (state) => {
+            state.loading = true;
+            state.error = false;
+        },
 
-export default productsReducer;
+        errorState: (state) => {
+            state.loading = false;
+            state.error = true;
+        },
+
+        showProducts: (state, action) => {
+            state.loading = false;
+            state.error = false;
+            state.list = action.payload;
+        },
+    },
+});
+
+export const { loadingState, errorState, showProducts } = productSlice.actions;
+export default productSlice.reducer;

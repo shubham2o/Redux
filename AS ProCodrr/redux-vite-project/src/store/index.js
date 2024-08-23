@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productsReducer from "./slices/productSlice";
-import cartReducer from "./slices/cartSlice";
-import wishlistReducer from "./slices/wishlistSlice";
+import productsSlice from "./slices/productSlice";
+import wishlistSlice from "./slices/wishlistSlice";
+import cartSlice from "./slices/cartSlice";
 import { logger } from './middleware/logger';
 
 export const store = configureStore({
     reducer: {
-        products: productsReducer,
-        cartItems: cartReducer,
-        wishlist: wishlistReducer,
+        products: productsSlice,
+        wishlist: wishlistSlice,
+        cartItems: cartSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
