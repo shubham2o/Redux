@@ -29,7 +29,7 @@ const Product = ({ productId, title, rating, price, image }) => {
             <div className="cta-container mt-3 mb-1 text-white text-sm font-semibold tracking-wide">
                 <button
                     className={`rounded-full ${existingWishlist ? "bg-pink-600" : "bg-zinc-500"}`}
-                    onClick={() => dispatch(toggleWishlist({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(toggleWishlist({ productId }))}
                 >
                     🤍 Wishlist
                 </button>
@@ -41,12 +41,10 @@ const Product = ({ productId, title, rating, price, image }) => {
 
                         <p className="w-16 h-9 text-base flex justify-center items-center">{existingCartItem.quantity}</p>
 
-                        <button className="pr-3" onClick={() => dispatch(increaseItemQuantity({ productId, title, rating, price, image }))}>+</button>
+                        <button className="pr-3" onClick={() => dispatch(increaseItemQuantity({ productId }))}>+</button>
                     </div>
                     :
-                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addItem({ productId, title, rating, price, image }))}>
-                        Add to Cart
-                    </button>
+                    <button className="rounded-full bg-zinc-500" onClick={() => dispatch(addItem({ productId }))}>Add to Cart</button>
                 }
             </div>
         </div>

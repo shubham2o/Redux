@@ -10,12 +10,7 @@ const wishlistSlice = createSlice({
     reducers: {
         toggleWishlist: (state, action) => {
             const existingWishlistIndex = findWishlistIndex(state, action);
-
-            if (existingWishlistIndex !== -1) {
-                state.splice(existingWishlistIndex, 1);
-            } else {
-                state.push({ ...action.payload, quantity: 1 });
-            }
+            existingWishlistIndex !== -1 ? state.splice(existingWishlistIndex, 1) : state.push(action.payload)
         },
     },
 });

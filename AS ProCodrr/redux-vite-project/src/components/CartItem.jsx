@@ -22,7 +22,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
 
                 <button
                     className={`text-[21px] ${existingWishlist ? "text-pink-600" : "text-[#b8b8c1]"}`}
-                    onClick={() => dispatch(toggleWishlist({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(toggleWishlist({ productId }))}
                 >
                     <GoHeartFill />
                 </button>
@@ -42,7 +42,7 @@ const CartItem = ({ productId, title, rating, price, image, quantity = 1 }) => {
 
                 <button
                     className="w-[3px] h-[3px] rounded-full px-3 pt-3.5 pb-2.5 bg-green-500 flex justify-center items-center"
-                    onClick={() => dispatch(increaseItemQuantity({ productId, title, rating, price, image }))}
+                    onClick={() => dispatch(increaseItemQuantity({ productId }))}
                 >
                     +
                 </button>
