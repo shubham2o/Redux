@@ -22,7 +22,7 @@ export const getWishlistItems = (({ products, wishlist }) => {
     });
 });
 
-export const getAllWishlistItems = createSelector(getWishlistItems, (state) => state);
+export const getAllWishlistItems = createSelector((state) => state, getWishlistItems);
 
 export const { toggleWishlist } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

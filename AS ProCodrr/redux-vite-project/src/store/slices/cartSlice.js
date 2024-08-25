@@ -38,7 +38,7 @@ export const getCartItems = (({ products, cartItems }) => {
     })
 });
 
-export const getAllCartItems = createSelector(getCartItems, (state) => state);
+export const getAllCartItems = createSelector((state) => state, getCartItems);
 
 export const { addItem, removeItem, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
