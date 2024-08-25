@@ -1,13 +1,9 @@
 import { useSelector } from "react-redux";
+import { getAllCartItems } from "../store/slices/cartSlice";
 import CartItem from "../components/CartItem";
 
 const Cart = () => {
-    const cartItems = useSelector(({ products, cartItems }) => {
-        return cartItems.map(({ id, quantity }) => {
-            const cartProduct = products.list.find((product) => product.id === id);
-            return { ...cartProduct, quantity };
-        })
-    });
+    const cartItems = useSelector(getAllCartItems);
 
     return (
         <div className="cart-container h-full font-semibold tracking-wide">

@@ -1,13 +1,9 @@
 import { useSelector } from "react-redux";
+import { getAllWishlistItems } from "../store/slices/wishlistSlice";
 import Product from "../components/Product";
 
 const Wishlist = () => {
-    const wishlistItems = useSelector(({ products, wishlist }) => {
-        return wishlist.map(({ id }) => {
-            const wishlistProduct = products.list.find((product) => product.id === id);
-            return wishlistProduct;
-        });
-    });
+    const wishlistItems = useSelector(getAllWishlistItems);
 
     return (
         <div className="max-w-screen-xl h-full mx-auto p-8 font-semibold tracking-wide">

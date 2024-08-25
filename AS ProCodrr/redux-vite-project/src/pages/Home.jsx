@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
+import { getProductLoadingState, getProductErrorState, getAllProducts } from "../store/slices/productSlice";
 import Product from "../components/Product";
 
 const Home = () => {
-    const products = useSelector(({ products }) => products.list);
-    const isLoading = useSelector(({ products }) => products.loading);
-    const isError = useSelector(({ products }) => products.error);
+    const isLoading = useSelector(getProductLoadingState);
+    const isError = useSelector(getProductErrorState);
+    const products = useSelector(getAllProducts);
 
     return (
         <div>

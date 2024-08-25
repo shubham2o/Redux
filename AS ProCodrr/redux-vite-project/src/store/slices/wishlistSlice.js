@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const findWishlistIndex = (state, action) => {
     return state.findIndex((wishlistItem) => wishlistItem.id === action.payload.id);
@@ -14,6 +14,15 @@ const wishlistSlice = createSlice({
         },
     },
 });
+
+export const getWishlistItems = (({ products, wishlist }) => {
+    return wishlist.map(({ id }) => {
+        const wishlistProduct = products.list.find((product) => product.id === id);
+        return wishlistProduct;
+    });
+});
+
+export const getAllWishlistItems = createSelector(getWishlistItems, (state) => state);
 
 export const { toggleWishlist } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
