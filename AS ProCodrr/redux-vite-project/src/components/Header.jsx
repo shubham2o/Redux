@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { loadingState, productState, errorState } from "../store/slices/productSlice";
+import { fetchProductsData } from "../store/slices/productSlice";
 import { Link } from 'react-router-dom';
 import { GrFavorite } from "react-icons/gr";
 import { PiShoppingCart } from "react-icons/pi";
@@ -9,23 +9,11 @@ const Header = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({
-            type: 'api/makeCall',
-            payload: {
-                url: 'products',
-                onStart: loadingState.type,
-                onSuccess: productState.type,
-                onError: errorState.type,
-            },
-        })
-
-        dispatch(() => {
-            console.log('Hello!');
-        })
+        dispatch(fetchProductsData())
     }, []);
 
-    const cartItems = useSelector(({ cartItems }) => cartItems);
     const wishlistItems = useSelector(({ wishlist }) => wishlist);
+    const cartItems = useSelector(({ cartItems }) => cartItems);
 
     return (
         <header className='bg-zinc-900'>

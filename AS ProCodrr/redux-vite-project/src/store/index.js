@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import productSlice from "./slices/productSlice";
 import wishlistSlice from "./slices/wishlistSlice";
 import cartSlice from "./slices/cartSlice";
-import { apiMiddleware } from './middleware/api';
+import { thunk } from './middleware/thunk';
 
 export const store = configureStore({
     reducer: {
@@ -10,5 +10,5 @@ export const store = configureStore({
         wishlist: wishlistSlice,
         cartItems: cartSlice,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware),
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), thunk],
 });

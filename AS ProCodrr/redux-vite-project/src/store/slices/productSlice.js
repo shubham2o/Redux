@@ -13,22 +13,32 @@ const productSlice = createSlice({
             state.error = false;
         },
 
-        errorState: (state) => {
-            state.loading = false;
-            state.error = true;
-        },
-
         productState: (state, action) => {
             state.loading = false;
             state.error = false;
             state.list = action.payload;
         },
+
+        errorState: (state) => {
+            state.loading = false;
+            state.error = true;
+        },
     },
 });
 
 export const getProductLoadingState = ({ products }) => products.loading;
-export const getProductErrorState = ({ products }) => products.error;
 export const getAllProducts = ({ products }) => products.list;
+export const getProductErrorState = ({ products }) => products.error;
 
-export const { loadingState, errorState, productState } = productSlice.actions;
+const { loadingState, productState, errorState } = productSlice.actions;
 export default productSlice.reducer;
+
+// Thunk Action Creator
+export const fetchProductsData = () => (dispatch) => {
+    dispatch(loadingState());
+
+    fetch('https://fakestoreapi.com/products')
+        .then((res) => res.json())
+        .then((data) => dispatch(productState(data)))
+        .catch(() => dispatch(errorState()))
+}

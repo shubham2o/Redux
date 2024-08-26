@@ -1,3 +1,4 @@
+// CUSTOM API MIDDLEWARE
 export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
     const BASE_URL = "https://fakestoreapi.com";
 
