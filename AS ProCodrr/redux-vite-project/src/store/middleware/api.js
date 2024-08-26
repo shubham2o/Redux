@@ -10,7 +10,6 @@ export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
             .then((data) => dispatch({ type: onSuccess, payload: data }))
             .catch(() => dispatch({ type: onError }))
     }
-    else {
-        next(action);
-    }
+
+    return next(action)
 }

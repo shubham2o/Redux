@@ -7,7 +7,9 @@ const Wishlist = () => {
 
     return (
         <div className="max-w-screen-xl h-full mx-auto p-8 font-semibold tracking-wide">
-            <h1 className="mb-9 text-2xl underline underline-offset-8 text-white text-center">Items in your Wishlist</h1>
+            <h1 className="mb-9 text-2xl underline underline-offset-8 text-white text-center">
+                {wishlistItems.length === 0 ? "No Items Found" : "Items in your Wishlist"}
+            </h1>
 
             <div className="products-container">
                 {wishlistItems.map(({ id, title, rating, price, image }) =>

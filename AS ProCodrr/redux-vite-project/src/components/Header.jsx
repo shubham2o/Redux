@@ -11,7 +11,16 @@ const Header = () => {
     useEffect(() => {
         dispatch({
             type: 'api/makeCall',
-            payload: { url: 'products', onStart: loadingState.type, onSuccess: productState.type, onError: errorState.type }
+            payload: {
+                url: 'products',
+                onStart: loadingState.type,
+                onSuccess: productState.type,
+                onError: errorState.type,
+            },
+        })
+
+        dispatch(() => {
+            console.log('Hello!');
         })
     }, []);
 
