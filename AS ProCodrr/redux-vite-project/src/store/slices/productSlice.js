@@ -18,7 +18,7 @@ const productSlice = createSlice({
             state.error = true;
         },
 
-        showProducts: (state, action) => {
+        productState: (state, action) => {
             state.loading = false;
             state.error = false;
             state.list = action.payload;
@@ -30,5 +30,5 @@ export const getProductLoadingState = ({ products }) => products.loading;
 export const getProductErrorState = ({ products }) => products.error;
 export const getAllProducts = ({ products }) => products.list;
 
-export const { loadingState, errorState, showProducts } = productSlice.actions;
+export const { loadingState, errorState, productState } = productSlice.actions;
 export default productSlice.reducer;

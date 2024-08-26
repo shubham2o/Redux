@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { loadingState, showProducts, errorState } from "../store/slices/productSlice";
+import { loadingState, productState, errorState } from "../store/slices/productSlice";
 import { Link } from 'react-router-dom';
 import { GrFavorite } from "react-icons/gr";
 import { PiShoppingCart } from "react-icons/pi";
@@ -9,12 +9,10 @@ const Header = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadingState());
-
-        fetch('https://fakestoreapi.com/products')
-            .then((res) => res.json())
-            .then((data) => dispatch(showProducts(data)))
-            .catch(() => dispatch(errorState()))
+        dispatch({
+            type: 'api/makeCall',
+            payload: { url: 'products', onStart: loadingState.type, onSuccess: productState.type, onError: errorState.type }
+        })
     }, []);
 
     const cartItems = useSelector(({ cartItems }) => cartItems);
