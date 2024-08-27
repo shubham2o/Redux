@@ -1,4 +1,4 @@
-const Task = ({ task, updateTask, deleteTask }) => {
+const TaskItem = ({ task, updateTask, deleteTask }) => {
   const { id, value, completed } = task;
 
   return (
@@ -54,4 +54,4 @@ const Task = ({ task, updateTask, deleteTask }) => {
   );
 }
 
-export default Task;
+export default TaskItem;
