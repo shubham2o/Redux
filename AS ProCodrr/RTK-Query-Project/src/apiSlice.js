@@ -9,6 +9,7 @@ export const api = createApi({
             transformResponse: (tasks) => tasks.reverse(),
             providesTags: ["Tasks"],
         }),
+
         addTasks: builder.mutation({
             query: (task) => ({
                 url: '/tasksfdfdf',
@@ -27,6 +28,7 @@ export const api = createApi({
                 }
             },
         }),
+
         updateTasks: builder.mutation({
             query: ({ id, ...updatedTasks }) => ({
                 url: `/tasks/${id}`,
@@ -46,6 +48,7 @@ export const api = createApi({
                 }
             },
         }),
+
         deleteTasks: builder.mutation({
             query: (id) => ({
                 url: `/tasks/${id}`,
