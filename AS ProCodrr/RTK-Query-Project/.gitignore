@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+.pnp/
+.pnp.js
+
+# Debug and test outputs
+.coverage/
+.nyc_output/
+.vs/
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build output directories
+dist/
+build/
+
+# Environment variables
+.env
