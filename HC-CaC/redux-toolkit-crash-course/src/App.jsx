@@ -1,9 +1,12 @@
+import './App.css';
+import Todos from "./pages/Todos";
+
 const App = () => {
   return (
     <div>
-      <h1>Vite + React + Redux</h1>
+      <Todos />
     </div>
   )
 }
 
-export default App; 
+export default App;
