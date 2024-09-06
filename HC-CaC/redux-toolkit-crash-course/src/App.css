@@ -40,3 +40,27 @@
 .read-the-docs {
   color: #888;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #6b7280;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(115, 115, 255);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(62, 62, 255);
+  cursor: pointer;
+}
