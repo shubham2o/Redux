@@ -140,16 +140,22 @@ const reducer = (state = initialState, action) => {
 // console.log(reduxState);
 
 // -------------------- HOW TO CREATE A STORE IN REDUX? --------------------
-const store = createStore(reducer);
-console.log(store);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
+console.log("store", store);
 
 // -------------------- HOW TO ACCESS A STATE IN REDUX? --------------------
-console.log(store.getState());
+console.log(".getState()", store.getState());
 
 // -------------------- HOW TO TRACK STATE CHANGES (DISPATCH ACTIONS) IN REDUX? --------------------
 store.subscribe(() => {
-    console.log(store.getState());
+    console.log(".subscribe()", store.getState());
 });
+
+const unsubscribe = store.subscribe(() => {
+    console.log(".unsubscribe()", store.getState());
+});
+
+unsubscribe();
 
 // -------------------- HOW TO CALL A REDUCER IN REDUX? --------------------
 store.dispatch({ type: INCREMENT, payload: 100 });
