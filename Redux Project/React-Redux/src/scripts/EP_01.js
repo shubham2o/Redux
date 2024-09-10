@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import { myCreateStore } from "./myRedux";
 
 /* -----------------------
 --------- CASE 1 ---------
@@ -139,20 +140,24 @@ const reducer = (state = initialState, action) => {
 // reduxState = reducer(reduxState, { type: DECREMENT, payload: 10 });
 // console.log(reduxState);
 
+/* -----------------------
+--------- CASE 4 ---------
+------------------------ */
+
 // -------------------- HOW TO CREATE A STORE IN REDUX? --------------------
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
 console.log("store", store);
 
 // -------------------- HOW TO ACCESS A STATE IN REDUX? --------------------
-console.log(".getState()", store.getState());
+console.log("   .getState()", store.getState());
 
 // -------------------- HOW TO TRACK STATE CHANGES (DISPATCH ACTIONS) IN REDUX? --------------------
 store.subscribe(() => {
-    console.log(".subscribe()", store.getState());
+    console.log("   .subscribe()", store.getState());
 });
 
 const unsubscribe = store.subscribe(() => {
-    console.log(".unsubscribe()", store.getState());
+    console.log("   .unsubscribe()", store.getState());
 });
 
 unsubscribe();
@@ -161,3 +166,27 @@ unsubscribe();
 store.dispatch({ type: INCREMENT, payload: 100 });
 store.dispatch({ type: "EXECUTE_DEFAULT_VALUE_IGNORE_PAYLOAD", payload: 1000 });
 store.dispatch({ type: DECREMENT, payload: 10 });
+
+/* -----------------------
+--------- CASE 5 ---------
+------------------------ */
+
+// -------------------- MADE OUR OWN REDUX (myRedux / myStore) --------------------
+const myStore = myCreateStore(reducer);
+console.log("myStore", myStore);
+
+console.log("   .getState()", myStore.getState());
+
+myStore.subscribe(() => {
+    console.log("   .subscribe()", myStore.getState());
+});
+
+const myUnsubscribe = myStore.subscribe(() => {
+    console.log("   .myUnsubscribe()", myStore.getState());
+});
+
+myUnsubscribe();
+
+myStore.dispatch({ type: INCREMENT, payload: 100 });
+myStore.dispatch({ type: "EXECUTE_DEFAULT_VALUE_IGNORE_PAYLOAD", payload: 1000 });
+myStore.dispatch({ type: DECREMENT, payload: 10 });
