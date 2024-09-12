@@ -1,7 +1,7 @@
 import { combineReducers, createStore } from "redux";
 import { productsSlice } from "./reducers/productsSlice";
-import { cartSlice, ADD_TO_CART, REMOVE_FROM_CART, INCREASE_ITEM_QUANTITY, DECREASE_ITEM_QUANTITY } from "./reducers/cartSlice";
-import { wishlistSlice, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "./reducers/wishlistSlice";
+import { cartSlice, addToCart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } from "./reducers/cartSlice";
+import { wishlistSlice, addToWishlist, removeFromWishlist } from "./reducers/wishlistSlice";
 
 const reducer = combineReducers({
     products: productsSlice,
@@ -12,24 +12,24 @@ const reducer = combineReducers({
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
 
 // -------------------- ADD_TO_CART --------------------
-store.dispatch({ type: ADD_TO_CART, payload: { id: 18, quantity: 1 } });
-store.dispatch({ type: ADD_TO_CART, payload: { id: 10, quantity: 1 } });
-store.dispatch({ type: ADD_TO_CART, payload: { id: 6, quantity: 1 } });
+store.dispatch(addToCart(6));
+store.dispatch(addToCart(10));
+store.dispatch(addToCart(18, 2));
 
 // -------------------- REMOVE_FROM_CART --------------------
-store.dispatch({ type: REMOVE_FROM_CART, payload: { id: 10 } });
+store.dispatch(removeFromCart(10));
 
 // -------------------- INCREASE_ITEM_QUANTITY --------------------
-store.dispatch({ type: INCREASE_ITEM_QUANTITY, payload: { id: 18 } });
-store.dispatch({ type: INCREASE_ITEM_QUANTITY, payload: { id: 6 } });
+store.dispatch(increaseItemQuantity(18));
+store.dispatch(increaseItemQuantity(6));
 
 // -------------------- DECREASE_ITEM_QUANTITY --------------------
-store.dispatch({ type: DECREASE_ITEM_QUANTITY, payload: { id: 6 } });
-store.dispatch({ type: DECREASE_ITEM_QUANTITY, payload: { id: 6 } });
+store.dispatch(decreaseItemQuantity(6));
+store.dispatch(decreaseItemQuantity(6));
 
 // -------------------- ADD_TO_WISHLIST --------------------
-store.dispatch({ type: ADD_TO_WISHLIST, payload: { id: 18, product: "Cricket Bat" } });
-store.dispatch({ type: ADD_TO_WISHLIST, payload: { id: 10, product: "Football" } });
+store.dispatch(addToWishlist(18, "Cricket Bat"));
+store.dispatch(addToWishlist(10, "Football"));
 
 // -------------------- REMOVE_FROM_WISHLIST --------------------
-store.dispatch({ type: REMOVE_FROM_WISHLIST, payload: { id: 10 } });
+store.dispatch(removeFromWishlist(10));
