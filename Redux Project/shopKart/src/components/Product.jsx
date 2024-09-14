@@ -1,4 +1,9 @@
-const Product = ({ image, title, rating, price }) => {
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/reducers/cartSlice";
+
+const Product = ({ id, image, title, rating, price }) => {
+    const dispatch = useDispatch();
+
     return (
         <div className="product" >
             <div className="product-image">
@@ -17,7 +22,7 @@ const Product = ({ image, title, rating, price }) => {
             </div>
 
             <div className="cta-container">
-                <button>Add to Cart</button>
+                <button onClick={() => dispatch(addToCart({ id, image, title, rating, price }))}>Add to Cart</button>
                 <button>Buy Now</button>
             </div>
         </div>

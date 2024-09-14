@@ -1,14 +1,13 @@
 import "./app.css";
-import { useSelector } from "react-redux";
-import Product from "./components/Product";
+import Header from './components/Header';
+import { Outlet } from 'react-router-dom';
 
 const App = () => {
-  const products = useSelector(({ products }) => products);
-
   return (
-    <div className="products-container">
-      {products.map(({ id, image, title, rating, price }) => <Product key={id} image={image} title={title} rating={rating.rate} price={price} />)}
-    </div>
+    <>
+      <Header />
+      <Outlet />
+    </>
   )
 }
 
