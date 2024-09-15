@@ -17,14 +17,16 @@ const Cart = () => {
                 </div>
 
                 {cartItems.map(({ id, title, rating, price, image, quantity }) => (
-                    <CartItem key={id} title={title} price={price} quantity={quantity} image={image} rating={rating} />
+                    <CartItem key={id} id={id} title={title} price={price} quantity={quantity} image={image} rating={rating} />
                 ))}
 
                 <div className="cart-header cart-item-container">
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div className="total">$500</div>
+                    <div className="total">
+                        ${cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)}
+                    </div>
                 </div>
             </div>
         </div>

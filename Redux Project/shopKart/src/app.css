@@ -169,18 +169,26 @@ form button {
   gap: 12px;
 }
 
+.cart-contents {
+  margin-top: 27px;
+  display: flex;
+  gap: 24px;
+}
+
 .cart-icon {
   position: relative;
+  font-size: 24px;
 }
 
 .cart-items-count {
+  margin-top: -5px;
   position: absolute;
-  font-size: 12px;
+  font-size: 17px;
   background-color: black;
   border-radius: 100%;
   color: white;
-  width: 16px;
-  height: 16px;
+  width: 27px;
+  height: 27px;
   display: flex;
   align-items: center;
   justify-content: center;

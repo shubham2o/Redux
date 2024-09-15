@@ -1,8 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/reducers/cartSlice";
+import { removeFromWishlist, addToWishlist } from "../store/reducers/wishlistSlice";
 
 const Product = ({ id, image, title, rating, price }) => {
     const dispatch = useDispatch();
+    const wishlist = useSelector(({ wishlist }) => wishlist)
+    const existingWishlistIndex = wishlist.findIndex((item) => item.id === id);
 
     return (
         <div className="product" >
@@ -23,7 +26,11 @@ const Product = ({ id, image, title, rating, price }) => {
 
             <div className="cta-container">
                 <button onClick={() => dispatch(addToCart({ id, image, title, rating, price }))}>Add to Cart</button>
-                <button>Buy Now</button>
+
+                {existingWishlistIndex >= 0
+                    ? <button onClick={() => dispatch(removeFromWishlist(id))}>Remove from Wishlist</button>
+                    : <button onClick={() => dispatch(addToWishlist({ id, image, title, rating, price }))}>Add to Wishlist</button>
+                }
             </div>
         </div>
     )

@@ -1,4 +1,9 @@
-const CartItem = ({ title, rating, price, image, quantity }) => {
+import { useDispatch } from "react-redux";
+import { decreaseItemQuantity, increaseItemQuantity } from "../store/reducers/cartSlice";
+
+const CartItem = ({ id, title, rating, price, image, quantity }) => {
+    const dispatch = useDispatch();
+
     return (
         <div className="cart-item-container">
             <div className="cart-item">
@@ -13,9 +18,11 @@ const CartItem = ({ title, rating, price, image, quantity }) => {
             <div className="item-price">${price}</div>
 
             <div className="item-quantity">
-                <button>-</button>
+                <button onClick={() => dispatch(decreaseItemQuantity(id))}>-</button>
+
                 <span>{quantity}</span>
-                <button>+</button>
+
+                <button onClick={() => dispatch(increaseItemQuantity(id))}>+</button>
             </div>
 
             <div className="item-total">${quantity * price}</div>
