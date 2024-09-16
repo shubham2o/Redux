@@ -1,10 +1,10 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const StoreContext = createContext();
 
 export const Provider = ({ store, children }) => {
     const [state, setState] = useState(store.getState());
-    store.subscribe(() => setState(store.getState()));
+    useEffect(() => store.subscribe(() => setState(store.getState())), []);
 
     return <StoreContext.Provider value={{ state, dispatch: store.dispatch }}>{children}</StoreContext.Provider>
 };
