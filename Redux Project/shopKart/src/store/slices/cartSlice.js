@@ -1,3 +1,5 @@
+import { produce } from "immer";
+
 // Action Types
 const ADD_TO_CART = "cartItems/AddItem";
 const REMOVE_FROM_CART = "cartItems/RemoveItem";
@@ -34,26 +36,36 @@ export const decreaseItemQuantity = (id) => {
 };
 
 // Reducer
-export const cartSlice = (state = [], action) => {
-    const existingCartItem = state.find((item) => item.id === action.payload.id);
+export const cartSlice = (originalState = [], action) => {
+    return (
+        produce(originalState, (state) => {
+            const existingCartItemIndex = state.findIndex((item) => item.id === action.payload.id);
 
-    switch (action.type) {
-        case ADD_TO_CART:
-            if (existingCartItem) {
-                return state.map((item) => item === existingCartItem ? { ...item, quantity: item.quantity + 1 } : item);
+            switch (action.type) {
+                case ADD_TO_CART:
+                    if (existingCartItemIndex >= 0) {
+                        state[existingCartItemIndex].quantity += 1
+                        break;
+                    }
+                    state.push({ ...action.payload, quantity: 1 });
+                    break;
+
+                case REMOVE_FROM_CART:
+                    state.splice(existingCartItemIndex, 1);
+                    break;
+
+                case INCREASE_ITEM_QUANTITY:
+                    state[existingCartItemIndex].quantity += 1
+                    break;
+
+                case DECREASE_ITEM_QUANTITY:
+                    state[existingCartItemIndex].quantity <= 1
+                        ? state.splice(existingCartItemIndex, 1)
+                        : state[existingCartItemIndex].quantity -= 1
+                    break;
             }
-            return [...state, { ...action.payload, quantity: 1 }];
 
-        case REMOVE_FROM_CART:
-            return state.filter((item) => item.id !== action.payload.id);
-
-        case INCREASE_ITEM_QUANTITY:
-            return state.map((item) => item.id === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item);
-
-        case DECREASE_ITEM_QUANTITY:
-            return state.map((item) => item.id === action.payload.id ? { ...item, quantity: item.quantity - 1 } : item).filter((item) => item.quantity > 0);
-
-        default:
             return state;
-    }
+        })
+    )
 };

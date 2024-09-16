@@ -1,3 +1,5 @@
+import { produce } from "immer";
+
 // Action Types
 const ADD_TO_WISHLIST = "wishlist/AddItem";
 const REMOVE_FROM_WISHLIST = "wishlist/RemoveItem";
@@ -18,20 +20,22 @@ export const removeFromWishlist = (id) => {
 };
 
 // Reducer
-export const wishlistSlice = (state = [], action) => {
-    const existingWishlistItem = state.find((item) => item.id === action.payload.id)
+export const wishlistSlice = (originalState = [], action) => {
+    return (
+        produce(originalState, (state) => {
+            const existingWishlistItemIndex = state.findIndex((item) => item.id === action.payload.id);
 
-    switch (action.type) {
-        case ADD_TO_WISHLIST:
-            if (existingWishlistItem) {
-                return state.map((item) => item === existingWishlistItem ? { ...item } : item)
+            switch (action.type) {
+                case ADD_TO_WISHLIST:
+                    state.push({ ...action.payload });
+                    break;
+
+                case REMOVE_FROM_WISHLIST:
+                    state.splice(existingWishlistItemIndex, 1);
+                    break;
             }
-            return [...state, { ...action.payload }];
 
-        case REMOVE_FROM_WISHLIST:
-            return state.filter((item) => item.id !== action.payload.id);
-
-        default:
             return state;
-    }
+        })
+    )
 };

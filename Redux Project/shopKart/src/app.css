@@ -196,3 +196,9 @@ form button {
   left: 50%;
   transform: translate(-40%, -90%);
 }
+
+.delete-btn {
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}

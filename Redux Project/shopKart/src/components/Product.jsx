@@ -25,12 +25,12 @@ const Product = ({ id, image, title, rating, price }) => {
             </div>
 
             <div className="cta-container">
-                <button onClick={() => dispatch(addToCart({ id, image, title, rating, price }))}>Add to Cart</button>
-
                 {existingWishlistIndex >= 0
                     ? <button onClick={() => dispatch(removeFromWishlist(id))}>Remove from Wishlist</button>
                     : <button onClick={() => dispatch(addToWishlist({ id, image, title, rating, price }))}>Add to Wishlist</button>
                 }
+
+                <button onClick={() => dispatch(addToCart({ id, image, title, rating, price }))}>Add to Cart</button>
             </div>
         </div>
     )
