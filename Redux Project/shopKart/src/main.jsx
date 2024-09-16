@@ -4,7 +4,7 @@ import Home from './pages/Home.jsx';
 import Wishlist from './pages/Wishlist.jsx';
 import Cart from './pages/Cart.jsx';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
+import { Provider } from './myReactRedux.jsx';
 import { store } from './store/store.js';
 
 const router = createBrowserRouter([

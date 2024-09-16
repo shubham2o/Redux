@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../myReactRedux.jsx";
 import { decreaseItemQuantity, increaseItemQuantity } from "../store/reducers/cartSlice";
 
 const CartItem = ({ id, title, rating, price, image, quantity }) => {

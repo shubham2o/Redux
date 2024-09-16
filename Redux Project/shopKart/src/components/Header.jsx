@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from '../myReactRedux.jsx';
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
