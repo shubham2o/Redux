@@ -1,5 +1,5 @@
 import { useDispatch } from "../myReactRedux.jsx";
-import { decreaseItemQuantity, increaseItemQuantity } from "../store/reducers/cartSlice";
+import { decreaseItemQuantity, increaseItemQuantity } from "../store/slices/cartSlice";
 
 const CartItem = ({ id, title, rating, price, image, quantity }) => {
     const dispatch = useDispatch();

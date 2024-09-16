@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "../myReactRedux.jsx";
-import { addToCart } from "../store/reducers/cartSlice";
-import { removeFromWishlist, addToWishlist } from "../store/reducers/wishlistSlice";
+import { addToCart } from "../store/slices/cartSlice";
+import { removeFromWishlist, addToWishlist } from "../store/slices/wishlistSlice";
 
 const Product = ({ id, image, title, rating, price }) => {
     const dispatch = useDispatch();
