@@ -4,8 +4,8 @@ import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
 
 const Header = () => {
-    const cartItems = useSelector(({ cartItems }) => cartItems);
     const wishlist = useSelector(({ wishlist }) => wishlist);
+    const cartItems = useSelector(({ cartItems }) => cartItems);
 
     return (
         <header>

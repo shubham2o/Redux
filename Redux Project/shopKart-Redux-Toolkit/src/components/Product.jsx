@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from "../store/slices/cartSlice";
+import { useSelector, useDispatch } from 'react-redux';
 import { removeFromWishlist, addToWishlist } from "../store/slices/wishlistSlice";
+import { addToCart } from "../store/slices/cartSlice";
 
 const Product = ({ id, image, title, rating, price }) => {
-    const dispatch = useDispatch();
     const wishlist = useSelector(({ wishlist }) => wishlist)
     const existingWishlistIndex = wishlist.findIndex((item) => item.id === id);
+    const dispatch = useDispatch();
 
     return (
         <div className="product" >
