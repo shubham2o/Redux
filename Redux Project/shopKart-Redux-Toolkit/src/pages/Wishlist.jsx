@@ -1,4 +1,4 @@
-import { useSelector } from "../myReactRedux.jsx";
+import { useSelector } from 'react-redux';
 import Product from "../components/Product";
 
 const Wishlist = () => {

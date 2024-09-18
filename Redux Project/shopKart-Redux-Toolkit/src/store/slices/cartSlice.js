@@ -1,71 +1,34 @@
-import { produce } from "immer";
+import { createSlice } from "@reduxjs/toolkit";
 
-// Action Types
-const ADD_TO_CART = "cartItems/AddItem";
-const REMOVE_FROM_CART = "cartItems/RemoveItem";
-const INCREASE_ITEM_QUANTITY = "cartItems/IncreaseItemQuantity";
-const DECREASE_ITEM_QUANTITY = "cartItems/DecreaseItemQuantity";
-
-// Action Creators
-export const addToCart = (productData) => {
-    return {
-        type: ADD_TO_CART,
-        payload: productData
-    }
+const existingCartItemIndex = (state, action) => {
+    return state.findIndex((item) => item.id === action.payload.id);
 };
 
-export const removeFromCart = (id) => {
-    return {
-        type: REMOVE_FROM_CART,
-        payload: { id }
-    }
-};
+const cartSlice = createSlice({
+    name: 'cartItems',
+    initialState: [],
+    reducers: {
+        addToCart: (state, action) => {
+            const existing = existingCartItemIndex(state, action);
+            existing >= 0 ? state[existing].quantity += 1 : state.push({ ...action.payload, quantity: 1 });
+        },
 
-export const increaseItemQuantity = (id) => {
-    return {
-        type: INCREASE_ITEM_QUANTITY,
-        payload: { id }
-    }
-};
+        removeFromCart: (state, action) => {
+            const existing = existingCartItemIndex(state, action);
+            state.splice(existing, 1);
+        },
 
-export const decreaseItemQuantity = (id) => {
-    return {
-        type: DECREASE_ITEM_QUANTITY,
-        payload: { id }
-    }
-};
+        increaseItemQuantity: (state, action) => {
+            const existing = existingCartItemIndex(state, action);
+            state[existing].quantity += 1;
+        },
 
-// Reducer
-export const cartSlice = (originalState = [], action) => {
-    return (
-        produce(originalState, (state) => {
-            const existingCartItemIndex = state.findIndex((item) => item.id === action.payload.id);
+        decreaseItemQuantity: (state, action) => {
+            const existing = existingCartItemIndex(state, action);
+            state[existing].quantity <= 1 ? state.splice(existing, 1) : state[existing].quantity -= 1;
+        },
+    },
+});
 
-            switch (action.type) {
-                case ADD_TO_CART:
-                    if (existingCartItemIndex >= 0) {
-                        state[existingCartItemIndex].quantity += 1
-                        break;
-                    }
-                    state.push({ ...action.payload, quantity: 1 });
-                    break;
-
-                case REMOVE_FROM_CART:
-                    state.splice(existingCartItemIndex, 1);
-                    break;
-
-                case INCREASE_ITEM_QUANTITY:
-                    state[existingCartItemIndex].quantity += 1
-                    break;
-
-                case DECREASE_ITEM_QUANTITY:
-                    state[existingCartItemIndex].quantity <= 1
-                        ? state.splice(existingCartItemIndex, 1)
-                        : state[existingCartItemIndex].quantity -= 1
-                    break;
-            }
-
-            return state;
-        })
-    )
-};
+export const { addToCart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions;
+export default cartSlice.reducer;

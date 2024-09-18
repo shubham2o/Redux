@@ -1,4 +1,4 @@
-import { useSelector } from '../myReactRedux.jsx';
+import { useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {

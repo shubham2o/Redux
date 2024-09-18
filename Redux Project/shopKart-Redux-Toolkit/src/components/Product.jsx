@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "../myReactRedux.jsx";
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from "../store/slices/cartSlice";
 import { removeFromWishlist, addToWishlist } from "../store/slices/wishlistSlice";
 
