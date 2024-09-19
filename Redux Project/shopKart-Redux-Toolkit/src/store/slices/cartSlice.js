@@ -30,5 +30,10 @@ const cartSlice = createSlice({
     },
 });
 
+const myCreateSlice = (config) => {
+    const { name, initialState, reducers } = config;
+    const actions = {};
+};
+
 export const { addToCart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
