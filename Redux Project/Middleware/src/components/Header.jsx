@@ -1,9 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { loadingState, displayState, errorState } from '../store/slices/productsSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
 
 const Header = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadingState());
+
+        fetch("https://fakestoreapi.com/products")
+            .then((res) => res.json())
+            .then((data) => dispatch(displayState(data)))
+            .catch(() => dispatch(errorState()));
+    }, []);
+
     const wishlist = useSelector(({ wishlist }) => wishlist);
     const cartItems = useSelector(({ cartItems }) => cartItems);
 

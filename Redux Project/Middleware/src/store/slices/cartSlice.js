@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { myCreateSlice } from "../../myReduxToolkit";
 
 const existingCartItemIndex = (state, action) => {
     return state.findIndex((item) => item.id === action.payload.id);
 };
 
-const cartSlice = myCreateSlice({
+const cartSlice = createSlice({
     name: 'cartItems',
     initialState: [],
     reducers: {

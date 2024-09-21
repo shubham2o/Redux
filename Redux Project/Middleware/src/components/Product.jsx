@@ -3,7 +3,7 @@ import { removeFromWishlist, addToWishlist } from "../store/slices/wishlistSlice
 import { addToCart } from "../store/slices/cartSlice";
 
 const Product = ({ id, image, title, rating, price }) => {
-    const wishlist = useSelector(({ wishlist }) => wishlist)
+    const wishlist = useSelector(({ wishlist }) => wishlist);
     const existingWishlistIndex = wishlist.findIndex((item) => item.id === id);
     const dispatch = useDispatch();
 
@@ -26,11 +26,11 @@ const Product = ({ id, image, title, rating, price }) => {
 
             <div className="cta-container">
                 {existingWishlistIndex >= 0
-                    ? <button onClick={() => dispatch(removeFromWishlist(id))}>Remove from Wishlist</button>
-                    : <button onClick={() => dispatch(addToWishlist({ id, image, title, rating, price }))}>Add to Wishlist</button>
+                    ? <button onClick={() => dispatch(removeFromWishlist({ id }))}>Remove from Wishlist</button>
+                    : <button onClick={() => dispatch(addToWishlist({ id }))}>Add to Wishlist</button>
                 }
 
-                <button onClick={() => dispatch(addToCart({ id, image, title, rating, price }))}>Add to Cart</button>
+                <button onClick={() => dispatch(addToCart({ id }))}>Add to Cart</button>
             </div>
         </div>
     )

@@ -2,7 +2,12 @@ import { useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {
-    const cartItems = useSelector(({ cartItems }) => cartItems);
+    const cartItems = useSelector(({ products, cartItems }) => {
+        return cartItems.map(({ id, quantity }) => {
+            const cartProduct = products.list.find((product) => product.id === id);
+            return { ...cartProduct, quantity };
+        });
+    });
 
     return (
         <div className="cart-container" >
@@ -17,7 +22,7 @@ const Cart = () => {
                 </div>
 
                 {cartItems.map(({ id, title, rating, price, image, quantity }) => (
-                    <CartItem key={id} id={id} title={title} price={price} quantity={quantity} image={image} rating={rating} />
+                    <CartItem key={id} id={id} title={title} price={price} quantity={quantity} image={image} rating={rating.rate} />
                 ))}
 
                 <div className="cart-header cart-item-container">
