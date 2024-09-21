@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const existingWishlistItemIndex = (state, action) => {
-    return state.findIndex((item) => item.id === action.payload.id);
+    return state.findIndex((item) => item.productId === action.payload.productId);
 };
 
 const wishlistSlice = createSlice({

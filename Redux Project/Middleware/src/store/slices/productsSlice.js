@@ -14,7 +14,7 @@ const productsSlice = createSlice({
             state.list = [];
         },
 
-        displayState: (state, action) => {
+        renderedProducts: (state, action) => {
             state.loading = false;
             state.error = false;
             state.list = action.payload;
@@ -28,5 +28,5 @@ const productsSlice = createSlice({
     }
 });
 
-export const { loadingState, displayState, errorState } = productsSlice.actions;
+export const { loadingState, renderedProducts, errorState } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { decreaseItemQuantity, increaseItemQuantity, removeFromCart } from '../store/slices/cartSlice';
 import { MdDelete } from "react-icons/md";
 
-const CartItem = ({ id, title, rating, price, image, quantity }) => {
+const CartItem = ({ productId, title, rating, price, image, quantity }) => {
     const dispatch = useDispatch();
 
     return (
@@ -19,13 +19,13 @@ const CartItem = ({ id, title, rating, price, image, quantity }) => {
             <div className="item-price">${price}</div>
 
             <div className="item-quantity">
-                <button onClick={() => dispatch(decreaseItemQuantity({ id }))}>-</button>
+                <button onClick={() => dispatch(decreaseItemQuantity({ productId }))}>-</button>
 
                 <span>{quantity}</span>
 
-                <button onClick={() => dispatch(increaseItemQuantity({ id }))}>+</button>
+                <button onClick={() => dispatch(increaseItemQuantity({ productId }))}>+</button>
 
-                <MdDelete className="delete-btn" onClick={() => dispatch(removeFromCart({ id }))} />
+                <MdDelete className="delete-btn" onClick={() => dispatch(removeFromCart({ productId }))} />
             </div>
 
             <div className="item-total">${quantity * price}</div>

@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { loadingState, displayState, errorState } from '../store/slices/productsSlice';
+import { loadingState, renderedProducts, errorState } from '../store/slices/productsSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
+import { renderedCartItems } from '../store/slices/cartSlice';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -13,8 +14,13 @@ const Header = () => {
 
         fetch("https://fakestoreapi.com/products")
             .then((res) => res.json())
-            .then((data) => dispatch(displayState(data)))
+            .then((data) => dispatch(renderedProducts(data)))
             .catch(() => dispatch(errorState()));
+
+        fetch("https://fakestoreapi.com/carts/5")
+            .then((res) => res.json())
+            .then((data) => dispatch(renderedCartItems(data)))
+        // .catch(() => ());
     }, []);
 
     const wishlist = useSelector(({ wishlist }) => wishlist);

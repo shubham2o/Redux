@@ -3,10 +3,12 @@ import CartItem from '../components/CartItem';
 
 const Cart = () => {
     const cartItems = useSelector(({ products, cartItems }) => {
-        return cartItems.map(({ id, quantity }) => {
-            const cartProduct = products.list.find((product) => product.id === id);
-            return { ...cartProduct, quantity };
-        });
+        return cartItems
+            .map(({ productId, quantity }) => {
+                const cartProduct = products.list.find((product) => product.id === productId);
+                return { ...cartProduct, quantity };
+            })
+            .filter(({ title }) => title);
     });
 
     return (
@@ -21,8 +23,8 @@ const Cart = () => {
                     <div className="total">Total</div>
                 </div>
 
-                {cartItems.map(({ id, title, rating, price, image, quantity }) => (
-                    <CartItem key={id} id={id} title={title} price={price} quantity={quantity} image={image} rating={rating.rate} />
+                {cartItems.map(({ id, title, price, image, quantity, rating }, index) => (
+                    <CartItem key={index} productId={id} title={title} price={price} quantity={quantity} image={image} rating={rating.rate} />
                 ))}
 
                 <div className="cart-header cart-item-container">
