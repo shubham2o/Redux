@@ -2,13 +2,15 @@ import { useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {
+    const isLoading = useSelector(({ cartItems }) => cartItems.loading);
+    const isError = useSelector(({ cartItems }) => cartItems.error);
     const cartItems = useSelector(({ products, cartItems }) => {
-        return cartItems
+        return cartItems.list
             .map(({ productId, quantity }) => {
                 const cartProduct = products.list.find((product) => product.id === productId);
                 return { ...cartProduct, quantity };
             })
-            .filter(({ title }) => title);
+            .filter(({ title }) => title)
     });
 
     return (
@@ -23,9 +25,23 @@ const Cart = () => {
                     <div className="total">Total</div>
                 </div>
 
-                {cartItems.map(({ id, title, price, image, quantity, rating }, index) => (
-                    <CartItem key={index} productId={id} title={title} price={price} quantity={quantity} image={image} rating={rating.rate} />
-                ))}
+                {isLoading
+                    ?
+                    <div>
+                        <h1>LOADING...</h1>
+                    </div>
+                    :
+                    (isError
+                        ?
+                        <div>
+                            <h1>404 (Not Found)</h1>
+                        </div>
+                        :
+                        cartItems.map(({ id, title, price, image, quantity, rating }, index) => (
+                            <CartItem key={index} productId={id} title={title} price={price} quantity={quantity} image={image} rating={rating.rate} />
+                        ))
+                    )
+                }
 
                 <div className="cart-header cart-item-container">
                     <div></div>

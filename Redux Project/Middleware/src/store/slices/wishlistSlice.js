@@ -15,8 +15,8 @@ const wishlistSlice = createSlice({
         removeFromWishlist: (state, action) => {
             const existing = existingWishlistItemIndex(state, action);
             state.splice(existing, 1);
-        },
-    },
+        }
+    }
 });
 
 export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;

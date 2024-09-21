@@ -1,30 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { loadingState, renderedProducts, errorState } from '../store/slices/productsSlice';
+import { loadingProducts, renderedProducts, errorProducts } from '../store/slices/productsSlice';
+import { loadingCartItems, renderedCartItems, errorCartItems } from '../store/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
-import { renderedCartItems } from '../store/slices/cartSlice';
 
 const Header = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadingState());
-
+        dispatch(loadingProducts());
         fetch("https://fakestoreapi.com/products")
             .then((res) => res.json())
             .then((data) => dispatch(renderedProducts(data)))
-            .catch(() => dispatch(errorState()));
+            .catch(() => dispatch(errorProducts()));
 
+        dispatch(loadingCartItems());
         fetch("https://fakestoreapi.com/carts/5")
             .then((res) => res.json())
             .then((data) => dispatch(renderedCartItems(data)))
-        // .catch(() => ());
+            .catch(() => (dispatch(errorCartItems())));
     }, []);
 
     const wishlist = useSelector(({ wishlist }) => wishlist);
-    const cartItems = useSelector(({ cartItems }) => cartItems);
+    const cartItems = useSelector(({ cartItems }) => cartItems.list);
 
     return (
         <header>
