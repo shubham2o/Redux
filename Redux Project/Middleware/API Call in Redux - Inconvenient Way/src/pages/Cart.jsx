@@ -47,9 +47,13 @@ const Cart = () => {
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div className="total">
-                        ${cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)}
-                    </div>
+
+                    {!isLoading && !isError
+                        &&
+                        <div className="total">
+                            ${cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)}
+                        </div>
+                    }
                 </div>
             </div>
         </div>
