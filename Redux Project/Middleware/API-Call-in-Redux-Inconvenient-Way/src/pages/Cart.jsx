@@ -1,17 +1,11 @@
 import { useSelector } from 'react-redux';
+import { loadingCartItemsSelector, errorCartItemsSelector, cartItemsSelector } from '../store/slices/cartSlice';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {
-    const isLoading = useSelector(({ cartItems }) => cartItems.loading);
-    const isError = useSelector(({ cartItems }) => cartItems.error);
-    const cartItems = useSelector(({ products, cartItems }) => {
-        return cartItems.list
-            .map(({ productId, quantity }) => {
-                const cartProduct = products.list.find((product) => product.id === productId);
-                return { ...cartProduct, quantity };
-            })
-            .filter(({ title }) => title)
-    });
+    const isLoading = useSelector(loadingCartItemsSelector);
+    const isError = useSelector(errorCartItemsSelector);
+    const cartItems = useSelector(cartItemsSelector);
 
     return (
         <div className="cart-container" >
@@ -49,10 +43,7 @@ const Cart = () => {
                     <div></div>
 
                     {!isLoading && !isError
-                        &&
-                        <div className="total">
-                            ${cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)}
-                        </div>
+                        && <div className="total">${cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)}</div>
                     }
                 </div>
             </div>

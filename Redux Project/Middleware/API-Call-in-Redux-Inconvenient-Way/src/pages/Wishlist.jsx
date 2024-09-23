@@ -1,13 +1,9 @@
 import { useSelector } from 'react-redux';
+import { wishlistSelector } from '../store/slices/wishlistSlice';
 import Product from "../components/Product";
 
 const Wishlist = () => {
-    const wishlist = useSelector(({ products, wishlist }) => {
-        return wishlist.map(({ productId }) => {
-            const wishlistProduct = products.list.find((item) => item.id === productId);
-            return wishlistProduct;
-        })
-    });
+    const wishlist = useSelector(wishlistSelector);
 
     return (
         <div className="products-container">
