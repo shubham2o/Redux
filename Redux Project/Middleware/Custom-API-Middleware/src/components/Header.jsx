@@ -5,22 +5,14 @@ import { loadingCartItems, renderedCartItems, errorCartItems } from '../store/sl
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
+import { fetchData } from '../store/middleware/api';
 
 const Header = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadingProducts());
-        fetch("https://fakestoreapi.com/products")
-            .then((res) => res.json())
-            .then((data) => dispatch(renderedProducts(data)))
-            .catch(() => dispatch(errorProducts()));
-
-        dispatch(loadingCartItems());
-        fetch("https://fakestoreapi.com/carts/5")
-            .then((res) => res.json())
-            .then((data) => dispatch(renderedCartItems(data)))
-            .catch(() => (dispatch(errorCartItems())));
+        dispatch(fetchData({ url: 'products', onLoading: loadingProducts.type, onSuccess: renderedProducts.type, onError: errorProducts.type }));
+        dispatch(fetchData({ url: 'carts/5', onLoading: loadingCartItems.type, onSuccess: renderedCartItems.type, onError: errorCartItems.type }));
     }, []);
 
     const wishlist = useSelector(({ wishlist }) => wishlist);
