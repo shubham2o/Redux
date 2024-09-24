@@ -32,5 +32,15 @@ export const loadingProductsSelector = ({ products }) => products.loading;
 export const renderedProductsSelector = ({ products }) => products.list;
 export const errorProductsSelector = ({ products }) => products.error;
 
-export const { loadingProducts, renderedProducts, errorProducts } = productsSlice.actions;
+const { loadingProducts, renderedProducts, errorProducts } = productsSlice.actions;
+
+// Thunk Action Creator
+export const fetchProductsData = () => (dispatch) => {
+    dispatch(loadingProducts());
+    fetch('https://fakestoreapi.com/products')
+        .then((res) => res.json())
+        .then((data) => dispatch(renderedProducts(data)))
+        .catch(() => dispatch(errorProducts()));
+};
+
 export default productsSlice.reducer;

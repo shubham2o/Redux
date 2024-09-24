@@ -69,8 +69,19 @@ const existingCartItem = ({ products, cartItems }) => {
             return { ...cartProduct, quantity };
         })
         .filter(({ title }) => title)
-}
+};
 export const cartItemsSelector = createSelector((state) => state, existingCartItem);
 
-export const { loadingCartItems, renderedCartItems, errorCartItems, addToCart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions;
+const { loadingCartItems, renderedCartItems, errorCartItems } = cartSlice.actions;
+
+// Thunk Action Creator
+export const fetchCartItemsData = () => (dispatch) => {
+    dispatch(loadingCartItems());
+    fetch('https://fakestoreapi.com/carts/5')
+        .then((res) => res.json())
+        .then((data) => dispatch(renderedCartItems(data)))
+        .catch(() => dispatch(errorCartItems()));
+};
+
+export const { addToCart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

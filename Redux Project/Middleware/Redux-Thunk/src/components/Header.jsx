@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchData } from '../store/middleware/api';
-import { loadingProducts, renderedProducts, errorProducts } from '../store/slices/productsSlice';
-import { loadingCartItems, renderedCartItems, errorCartItems } from '../store/slices/cartSlice';
+import { fetchProductsData } from '../store/slices/productsSlice';
+import { fetchCartItemsData } from '../store/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
@@ -11,8 +10,8 @@ const Header = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchData({ url: 'products', onLoading: loadingProducts.type, onSuccess: renderedProducts.type, onError: errorProducts.type }));
-        dispatch(fetchData({ url: 'carts/5', onLoading: loadingCartItems.type, onSuccess: renderedCartItems.type, onError: errorCartItems.type }));
+        dispatch(fetchProductsData());
+        dispatch(fetchCartItemsData());
     }, []);
 
     const wishlist = useSelector(({ wishlist }) => wishlist);
