@@ -1,35 +1,27 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, createSelector } from "@reduxjs/toolkit";
 
 const existingCartItemIndex = (state, action) => {
     return state.list.findIndex((item) => item.productId === action.payload.productId);
 };
 
+export const fetchCartItemsData = createAsyncThunk('cartItems', async () => {
+    try {
+        const response = await fetch('https://fakestoreapi.com/carts/5');
+        return response.json();
+    }
+    catch (err) {
+        return err;
+    }
+});
+
 const cartSlice = createSlice({
     name: 'cartItems',
     initialState: {
         loading: false,
-        error: false,
         list: [],
+        error: false,
     },
     reducers: {
-        loadingCartItems: (state) => {
-            state.loading = true;
-            state.error = false;
-            state.list = [];
-        },
-
-        renderedCartItems: (state, action) => {
-            state.loading = false;
-            state.error = false;
-            state.list = action.payload.products;
-        },
-
-        errorCartItems: (state) => {
-            state.loading = false;
-            state.error = true;
-            state.list = [];
-        },
-
         addToCart: (state, action) => {
             state.loading = false;
             state.error = false;
@@ -57,6 +49,24 @@ const cartSlice = createSlice({
             const existing = existingCartItemIndex(state, action);
             state.list[existing].quantity <= 1 ? state.list.splice(existing, 1) : state.list[existing].quantity -= 1;
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCartItemsData.pending, (state) => {
+                state.loading = true;
+                state.list = [];
+                state.error = false;
+            })
+            .addCase(fetchCartItemsData.fulfilled, (state, action) => {
+                state.loading = false;
+                state.list = action.payload.products;
+                state.error = false;
+            })
+            .addCase(fetchCartItemsData.rejected, (state) => {
+                state.loading = false;
+                state.list = [];
+                state.error = true;
+            })
     }
 });
 
@@ -71,17 +81,6 @@ const existingCartItem = ({ products, cartItems }) => {
         .filter(({ title }) => title)
 };
 export const cartItemsSelector = createSelector((state) => state, existingCartItem);
-
-const { loadingCartItems, renderedCartItems, errorCartItems } = cartSlice.actions;
-
-// Thunk Action Creator
-export const fetchCartItemsData = () => (dispatch) => {
-    dispatch(loadingCartItems());
-    fetch('https://fakestoreapi.com/carts/5')
-        .then((res) => res.json())
-        .then((data) => dispatch(renderedCartItems(data)))
-        .catch(() => dispatch(errorCartItems()));
-};
 
 export const { addToCart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
