@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { fetchData } from '../store/middleware/api';
 import { loadingProducts, renderedProducts, errorProducts } from '../store/slices/productsSlice';
 import { loadingCartItems, renderedCartItems, errorCartItems } from '../store/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import CartIcon from '../assets/cart-icon.svg';
-import { fetchData } from '../store/middleware/api';
 
 const Header = () => {
     const dispatch = useDispatch();
