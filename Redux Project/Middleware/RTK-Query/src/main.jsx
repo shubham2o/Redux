@@ -1,35 +1,18 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App.jsx';
-import Home from './pages/Home.jsx';
-import Wishlist from './pages/Wishlist.jsx';
-import Cart from './pages/Cart.jsx';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './store/store.js';
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App.jsx";
+import Home from "./Home.jsx";
+import ReactDOM from "react-dom/client";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/wishlist",
-        element: <Wishlist />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
+      { path: "/", element: <Home /> },
+      { path: "/contact", element: <p>Contact Us</p> }
     ],
-  },
+  }
 ]);
 
-createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<RouterProvider router={router} />);
